@@ -1,0 +1,72 @@
+@import url(//fonts.googleapis.com/css?family=Roboto);
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  background-color: white;
+}
+
+.banner {
+  background-image: url("../images/background.jpg");
+  background-position: center;
+  background-size: cover;
+  min-height: 9rem;
+  height: 9rem;
+  position: relative;
+  padding-left: 1.25rem;
+  display: block;
+}
+.banner__content {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+}
+.banner__header {
+  font-size: 2.5rem;
+  color: #323232;
+}
+.banner__paragraph {
+  display: block;
+  font-size: 1rem;
+}
+
+.chat__container {
+  padding: 1.5rem 2.25rem 0.5rem;
+}
+
+.msg__area {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.msg__input {
+  display: inline-block;
+}
+
+.msg__color {
+  display: inline-block;
+  height: 2.5rem;
+}
+
+.msg__send {
+  border: none;
+  background-color: #f1983c !important;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/*# sourceMappingURL=style.css.map */
