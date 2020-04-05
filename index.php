@@ -1,6 +1,5 @@
 <?php 
 
-
 use App\Controllers\ChatController;
 use Core\H;
 
@@ -41,4 +40,4 @@ else
 }
 
 $chat = new ChatController;
-$chat->{$method}();
+call_user_func_array([$chat, $method], $url ?? []);

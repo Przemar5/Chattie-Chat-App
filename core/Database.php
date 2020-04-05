@@ -60,6 +60,11 @@ class Database
 		$this->_stmt->debugDumpParams();
 	}
 	
+	public function setAttribute($name, $value)
+	{
+		$this->_pdo->setAttribute($name, $value);
+	}
+	
 	public function select(string $table, $data, $fetch = true, $fetchMode = PDO::FETCH_OBJ, $class = false)
 	{
 		try
@@ -92,6 +97,10 @@ class Database
 					if ($fetch)
 					{
 						return $this->fetch($fetchMode, $class, true, false);
+					}
+					else 
+					{
+						return $this->_stmt;
 					}
 				}
 				else

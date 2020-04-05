@@ -32,17 +32,15 @@
 					</div>
 					
 					<div class="chat">
-						<div class="container bg-light chat__container">
-							<div class="d-block mb-3">
-								<textarea name="msgArea" id="msgArea" rows="10" class="form-control msg__area"></textarea>
-							</div>
+						<div class="container-fluid bg-dark chat__container">
+							<div class="d-block mb-4 bg-light msg__area form-control" id="msgArea" style="min-height:20rem; min-height:45vh;"></div>
 							
 							<form action="<?= URL; ?>send" id="msgForm" class="row mb-3">
-								<div class="col-sm-8 mb-3">
+								<div class="col-8 col-sm-10 mb-3">
 									<input type="text" name="msgNick" id="msgNick" class="form-control msg__nick" placeholder="Enter your nick">
 								</div>
 
-								<div class="col-sm-4 mb-3">
+								<div class="col-4 col-sm-2 mb-3">
 									<input type="color" name="msgColor" id="msgColor" class="form-control msg__color">
 								</div>
 								
@@ -62,6 +60,7 @@
 		
 		<a href="https://pngtree.com/free-backgrounds">free background photos from pngtree.com</a>
 		
+		<script src="<?= URL; ?>public/js/message.class.js"></script>
 		<script src="<?= URL; ?>public/js/main.js"></script>
 	</body>
 </html>

@@ -1,24 +1,49 @@
 $(document).ready(function() {
+	
+	var init = function() {
+		$.post('http://localhost/files/Projects/Chattie/init/50')
+		.done(function(data) {
+			let messages = JSON.parse(data);
+			
+			for (i in messages)
+			{
+				let message = new Message();
+				message.assign(messages[i]);
+				$('#msgArea').append(message.view());
+			}
+		});
+	}
+	
 	$('#msgForm').submit(function() {
 		
-		var data = new Object();
-		url = $(this).attr('action');
-		data.nick = $(this).find('[name="msgNick"]').val();
-		data.msg = $(this).find('[name="msgColor"]').val();
-		data.color = $(this).find('[name="msgInput"]').val();
+		let url = $(this).attr('action');
+		let nick = $(this).find('[name="msgNick"]').val();
+		let color = $(this).find('[name="msgColor"]').val();
+		let message = $(this).find('[name="msgInput"]').val();
 		
-		send(url, data)
-//		send($(this).attr());
+		send(url, nick, color, message);
 		
 		return false;
 	});
 	
-	var send = function(url, data)
+	var appendMessage = function(data) {
+		let messageData = JSON.parse(data);
+		let message = new Message();
+		message.assign(messageData[0]);
+		$('#msgArea').append(message.view());
+	}
+	
+	var send = function(url, nick, color, message)
 	{
 		$.post(url, {
-			data: data
+			nick: nick,
+			color: color,
+			message: message
 		}).done(function(data) {
-			console.log(data)
+			console.log(data);
+			appendMessage(data);
 		});
 	}
+	
+	init();
 });

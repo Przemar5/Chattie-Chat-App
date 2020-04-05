@@ -18,15 +18,29 @@ class ChatController
 	public function start()
 	{
 		$path = ROOT . DS . 'app' . DS . 'views' . DS . 'main' . DS . 'index.php';
-		H::dd($this->_messages->last(10));
+		
 		if (is_readable($path))
 		{
 			require_once $path;
 		}
 	}
 	
+	public function init($ammount)
+	{
+		$messages = json_encode($this->_messages->last($ammount));
+		ob_clean();
+		
+		echo $messages;
+	}
+	
 	public function send()
 	{
-		
+		if ($lastId = $this->_messages->insert($_POST))
+		{
+			$message = json_encode($this->_messages->find($lastId));
+			ob_clean();
+			
+			echo $message;
+		}
 	}
 }
