@@ -64,7 +64,19 @@ class MessageModel
 	public function last($limit = 50)
 	{
 		$data = [
+			'order' => 'id DESC',
 			'limit' => $limit
+		];
+		$result = Database::getInstance()->select($this->_table, $data, true, PDO::FETCH_OBJ);
+
+		return $result;
+	}
+	
+	public function lastFrom($id)
+	{
+		$data = [
+			'bind' => [$id],
+			'conditions' => 'id > ?'
 		];
 		$result = Database::getInstance()->select($this->_table, $data, true, PDO::FETCH_OBJ);
 

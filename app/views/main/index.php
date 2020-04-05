@@ -33,7 +33,7 @@
 					
 					<div class="chat">
 						<div class="container-fluid bg-dark chat__container">
-							<div class="d-block mb-4 bg-light msg__area form-control" id="msgArea" style="min-height:20rem; min-height:45vh;"></div>
+							<div class="d-block mb-4 bg-light msg__area form-control" id="msgArea" style="min-height:20rem; min-height:45vh; max-height:20rem; max-height:35vh; overflow-y:scroll;"></div>
 							
 							<form action="<?= URL; ?>send" id="msgForm" class="row mb-3">
 								<div class="col-8 col-sm-10 mb-3">

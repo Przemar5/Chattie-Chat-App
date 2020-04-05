@@ -43,4 +43,12 @@ class ChatController
 			echo $message;
 		}
 	}
+	
+	public function lastFrom($id)
+	{
+		$messages = json_encode($this->_messages->lastFrom($id));
+		ob_clean();
+
+		echo $messages;
+	}
 }
