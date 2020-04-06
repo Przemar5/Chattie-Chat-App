@@ -17,10 +17,10 @@
 		<link rel="stylesheet" href="<?= URL; ?>public/css/style.css">
 	</head>
 	<body>
-		<div class="row">
-			<div class="col-sm-10 offset-sm-1">
+		<div class="row w-100 m-0">
+			<div class="col-12 col-lg-10 offset-lg-1 p-0">
 				<div class="app">
-					<div class="banner">
+					<div class="banner w-100">
 						<div class="banner__content">
 							<h1 class="banner__header">
 								Chattie
@@ -31,27 +31,41 @@
 						</div>
 					</div>
 					
-					<div class="chat">
-						<div class="container-fluid bg-dark chat__container">
-							<div class="d-block mb-4 bg-light msg__area form-control" id="msgArea" style="min-height:20rem; min-height:45vh; max-height:20rem; max-height:35vh; overflow-y:scroll;"></div>
-							
-							<form action="<?= URL; ?>send" id="msgForm" class="row mb-3">
-								<div class="col-8 col-sm-10 mb-3">
-									<input type="text" name="msgNick" id="msgNick" class="form-control msg__nick" placeholder="Enter your nick">
-								</div>
+					<div class="row w-100 m-0 bg-dark">
+						<div class="col-sm-3 col-md-3 p-4 pr-sm-3 w-100 rooms">
+							<nav class="jumbotron h-100 p-0">
+								<ul class="rooms__list">
+									<li class="rooms__item d-block">
+										<a href="#" class="rooms__link">Room 1</a>
+									</li>
+									
+									<li class="rooms__item d-block">
+										<a href="#" class="rooms__link">Room 1</a>
+									</li>
+									
+									<li class="rooms__item d-block">
+										<a href="#" class="rooms__link">Room 1</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
 
-								<div class="col-4 col-sm-2 mb-3">
-									<input type="color" name="msgColor" id="msgColor" class="form-control msg__color">
-								</div>
-								
-								<div class="col-md-10 mb-3">
-									<input type="text" name="msgInput" id="msgInput" class="form-control msg__input" placeholder="Enter your message here...">
-								</div>
+						<div class="col-sm-9 col-md-9 p-0 chat">
+							<div class="container-fluid p-4 pl-sm-3 chat__container">
+								<div class="d-block mb-4 bg-light msg__area form-control" id="msgArea" style="min-height:20rem; min-height:45vh; max-height:20rem; max-height:35vh; overflow-y:scroll;"></div>
 
-								<div class="col-md-2 mb-3">
-									<input type="submit" value="Send" name="msgSend" id="msgSend" class="btn btn-block btn-main input msg__send">
-								</div>
-							</form>
+								<input type="hidden" id="lastId" value="0">
+
+								<form action="<?= URL; ?>send" id="msgForm" class="d-flex">
+
+									<input type="text" name="msgInput" id="msgInput" class="form-control msg__input d-inline-block" placeholder="Enter your message here...">
+
+									<input type="color" name="msgColor" id="msgColor" class="form-control msg__color ml-3">
+
+									<input type="submit" value="Send" name="msgSend" id="msgSend" class="btn btn-main msg__send ml-3">
+
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
