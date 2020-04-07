@@ -1,46 +1,20 @@
 <?php
 
 namespace App\Models;
-use Core\Database;
-use Core\H;
+use Core\Classes\Database;
+use Core\Classes\H;
+use Core\Classes\Model;
 use \PDO;
 
 
-class MessageModel
+class MessageModel extends Model
 {
 	public $id, $nick, $color, $message, $created_at, $deleted;
-	protected 	$_db, 
-				$_table;
 
 	
 	public function __construct()
 	{
-		$this->_table = 'message';
-	}
-	
-	public function assign($data)
-	{
-		if (is_object($data))
-			$data = (array) $data;
-		
-		if (is_array($data))
-		{
-			foreach ($data as $key => $value)
-			{
-				if (property_exists($this, $key))
-					$this->{$key} = $value;
-			}
-		}
-	}
-	
-	public function find($id)
-	{
-		$data = [
-			'bind' => [$id],
-			'conditions' => 'id = ?'
-		];
-		
-		return Database::getInstance()->select($this->_table, $data, true, PDO::FETCH_OBJ);
+		parent::__construct('message');
 	}
 	
 	public function insert($fields)
@@ -51,9 +25,9 @@ class MessageModel
 			'message' => $fields['message']
 		];
 		
-		if (Database::getInstance()->insert($this->_table, $data))
+		if ($this->_db->insert($this->_table, $data))
 		{
-			return Database::getInstance()->lastInsertId();
+			return $this->_db->lastInsertId();
 		}
 		else
 		{
@@ -61,25 +35,24 @@ class MessageModel
 		}
 	}
 	
-	public function last($limit = 50)
+	public function last($room, $limit = 50)
 	{
 		$data = [
 			'order' => 'id DESC',
 			'limit' => $limit
 		];
-		$result = Database::getInstance()->select($this->_table, $data, true, PDO::FETCH_OBJ);
+		$result = $this->_db->select($this->_table, $data, true, PDO::FETCH_OBJ);
 
 		return $result;
 	}
 	
-	public function lastFrom($id)
+	public function lastFromForRoom($roomId, $messageId)
 	{
 		$data = [
-			'bind' => [$id],
-			'conditions' => 'id > ?'
+			'bind' => [$messageId, $roomId],
+			'conditions' => 'id > ? AND id IN (SELECT message_id FROM room_message WHERE room_id = ?)'
 		];
-		$result = Database::getInstance()->select($this->_table, $data, true, PDO::FETCH_OBJ);
-
-		return $result;
+		
+		return $this->select($data);
 	}
 }

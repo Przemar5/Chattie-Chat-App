@@ -1,7 +1,9 @@
 <?php 
 
+session_start();
+
 use App\Controllers\ChatController;
-use Core\H;
+use Core\Classes\H;
 
 
 require_once 'config/config.php';
@@ -36,8 +38,10 @@ if (isset($_SERVER['PATH_INFO']))
 }
 else
 {
-	$method = 'start';
+	$method = 'chat';
 }
 
 $chat = new ChatController;
-call_user_func_array([$chat, $method], $url ?? []);
+
+if (method_exists($chat, $method))
+	call_user_func_array([$chat, $method], $url ?? []);

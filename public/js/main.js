@@ -1,6 +1,7 @@
 var nick = prompt('Enter your name');
 var chatDiv = document.getElementById('msgArea');
 var url = 'http://localhost/files/Projects/Chattie/';
+var room = /(?<!(chattie\/chat\/\/))[0-9a-zA-Z_\-]*$/i.exec(window.location.href)[0]
 var lastId = 0;
 
 $(document).ready(function() {
@@ -26,7 +27,6 @@ $(document).ready(function() {
 	
 	$('#msgForm').submit(function() {
 		let url = $(this).attr('action');
-//		let nick = $(this).find('[name="msgNick"]').val();
 		let color = $(this).find('[name="msgColor"]').val();
 		let message = $(this).find('[name="msgInput"]').val();
 		
@@ -56,13 +56,15 @@ $(document).ready(function() {
 	
 	var send = function(url, nick, color, message)
 	{
+		console.log(arguments);
+		
 		$.post(url, {
 			nick: nick,
 			color: color,
 			message: message
+			
 		}).done(function(data) {
-//			updateChatWindow();
-			scrollBottom();
+			console.log(data);
 			$('#msgInput').val('');
 		});
 	}
@@ -81,13 +83,16 @@ $(document).ready(function() {
 						appendMessage(messages[i]);
 
 					$('#lastId').val(messages[messages.length - 1].id);
+					
 					scrollBottom();
 				}
 			}
 			
-//			updateChatWindow();
+			updateChatWindow();
 		});
 	}
+	
+	console.log(room)
 	
 //	init();
 	updateChatWindow();

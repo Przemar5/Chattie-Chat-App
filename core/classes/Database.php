@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Core;
+namespace Core\Classes;
 use \PDO;
 use \PDOException;
 
@@ -82,7 +82,7 @@ class Database
 				{
 					$i = 1;
 
-					if (is_array($data['bind']) && !empty($data['bind']))
+					if (!empty($data['bind']) && is_array($data['bind']))
 					{
 						foreach ($data['bind'] as $param)
 						{
@@ -313,7 +313,8 @@ class Database
 	
 	public function buildSelectQuery(string $table, $data)
 	{
-		extract($data);
+		if (is_array($data))
+			extract($data);
 		
 		try
 		{
@@ -336,7 +337,8 @@ class Database
 	
 	public function buildInsertQuery(string $table, $data)
 	{
-		extract($data);
+		if (is_array($data))
+			extract($data);
 		
 		try
 		{
@@ -366,7 +368,8 @@ class Database
 	
 	public function buildUpdateQuery(string $table, $data)
 	{
-		extract($data);
+		if (is_array($data))
+			extract($data);
 		
 		try
 		{
@@ -396,7 +399,8 @@ class Database
 	
 	public function buildDeleteQuery(string $table, $data)
 	{
-		extract($data);
+		if (is_array($data))
+			extract($data);
 		
 		try
 		{

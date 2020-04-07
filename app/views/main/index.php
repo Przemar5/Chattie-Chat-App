@@ -35,17 +35,15 @@
 						<div class="col-sm-3 col-md-3 p-4 pr-sm-3 w-100 rooms">
 							<nav class="jumbotron h-100 p-0">
 								<ul class="rooms__list">
-									<li class="rooms__item d-block">
-										<a href="#" class="rooms__link">Room 1</a>
-									</li>
-									
-									<li class="rooms__item d-block">
-										<a href="#" class="rooms__link">Room 1</a>
-									</li>
-									
-									<li class="rooms__item d-block">
-										<a href="#" class="rooms__link">Room 1</a>
-									</li>
+									<?php if (!empty($rooms)): ?>
+										<?php foreach ($rooms as $room): ?>
+											<li class="rooms__item d-block">
+												<a href="<?= URL . 'chat/' . $room->slug; ?>" class="rooms__link">
+													<?= $room->name; ?>
+												</a>
+											</li>
+										<?php endforeach; ?>
+									<?php endif; ?>
 								</ul>
 							</nav>
 						</div>
